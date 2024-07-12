@@ -14,7 +14,7 @@ function App() {
     specialAttack:'',
     specialDefense:'',
     speed:'',
-    types:'',
+    types:[],
     src:'',
     spritesArray:[],
   })
@@ -42,7 +42,7 @@ function App() {
     const inputValue=input.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g,'-');
     const isValidPokemon = data.some(obj => obj.id == inputValue || obj.name === inputValue);
     if (isValidPokemon) {
-      fetch(`https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/${input}`)
+      fetch(`https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/${inputValue}`)
       .then(res => res.json())
       .then(data => {
       setPokemonStats({
@@ -73,12 +73,9 @@ function App() {
   }
 
   const handleTypes = () => {
-    if (!Array.isArray(types)) {
-      return null;
-    }
     return types.map((el,index) => {
       return (
-        <div key={index }className={`${el}-type element-container`}>{el.toUpperCase()}</div>
+        <div key={index} className={`${el}-type element-container`}>{el.toUpperCase()}</div>
       )
     })
   }
